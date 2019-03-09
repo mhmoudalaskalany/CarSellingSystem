@@ -6,6 +6,7 @@ namespace CarSellingSystem.Persistence
     public class CarDbContext : DbContext
     {
         public DbSet<Make> Makes { get; set; }
+        public DbSet<Feature> Features { get; set; }
 
         public CarDbContext(DbContextOptions<CarDbContext> options) : base(options)
         {
