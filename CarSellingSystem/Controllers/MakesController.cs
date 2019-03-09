@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using CarSellingSystem.ApiResources;
 using CarSellingSystem.Models;
 using CarSellingSystem.Persistence;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +13,18 @@ namespace CarSellingSystem.Controllers
     public class MakesController : Controller
     {
         private readonly CarDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MakesController(CarDbContext context)
+        public MakesController(CarDbContext context , IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         [HttpGet("/api/makes")]
-        public async Task<IEnumerable<Make>> GetMakes()
+        public async Task<IEnumerable<MakeResource>> GetMakes()
         {
-            return await _context.Makes.Include(m => m.Models).ToListAsync();
+            var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
+            return _mapper.Map<List<Make>,List<MakeResource>>(makes);
         }
     }
 }
