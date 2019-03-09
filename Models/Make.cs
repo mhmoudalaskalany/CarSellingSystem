@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace CarSellingSystem.Models
 {
     public class Make

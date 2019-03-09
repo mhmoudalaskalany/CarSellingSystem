@@ -51,6 +51,10 @@
               "target": "Package",
               "version": "[3.0.0-preview3-19153-02, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
             "Microsoft.NETCore.Platforms": {
               "suppressParent": "All",
               "target": "Package",
