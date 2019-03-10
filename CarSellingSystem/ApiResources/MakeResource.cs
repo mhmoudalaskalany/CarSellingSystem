@@ -8,11 +8,11 @@ namespace CarSellingSystem.ApiResources
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<ModelResource> ModelResources { get; set; }
+        public ICollection<ModelResource> Models { get; set; }
 
         public MakeResource()
         {
-            ModelResources = new Collection<ModelResource>();
+            Models = new Collection<ModelResource>();
         }
     }
 }

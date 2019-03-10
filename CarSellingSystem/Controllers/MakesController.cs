@@ -24,7 +24,8 @@ namespace CarSellingSystem.Controllers
         public async Task<IEnumerable<MakeResource>> GetMakes()
         {
             var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
-            return _mapper.Map<List<Make>,List<MakeResource>>(makes);
+            var makesDtos = _mapper.Map<List<Make>, List<MakeResource>>(makes);
+            return makesDtos;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AutoMapper;
 using CarSellingSystem.ApiResources;
 using CarSellingSystem.Models;
 
