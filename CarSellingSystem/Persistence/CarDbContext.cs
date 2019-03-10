@@ -20,6 +20,12 @@ namespace CarSellingSystem.Persistence
             modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactEmail).HasColumnName("ContactEmail");
             modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactPhone).HasColumnName("ContactPhone");
             modelBuilder.Entity<Vehicle>().ToTable("Vehicles", "Vehicles");
+
+            modelBuilder.Entity<VehicleFeature>().HasKey(vf => new
+            {
+                vf.VehicleId,
+                vf.FeatureId
+            });
         }
     }
 }
