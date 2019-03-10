@@ -6,9 +6,9 @@ namespace CarSellingSystem.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("INSERT INTO FEATURES (NAME) VALUES ('FEATURE1')");
-            migrationBuilder.Sql("INSERT INTO FEATURES (NAME) VALUES ('FEATURE2')");
-            migrationBuilder.Sql("INSERT INTO FEATURES (NAME) VALUES ('FEATURE3')");
+            migrationBuilder.Sql("INSERT INTO FEATURES (NAME) VALUES ('Turbo Cooler')");
+            migrationBuilder.Sql("INSERT INTO FEATURES (NAME) VALUES ('Air Conditioner')");
+            migrationBuilder.Sql("INSERT INTO FEATURES (NAME) VALUES ('4 * 4')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
