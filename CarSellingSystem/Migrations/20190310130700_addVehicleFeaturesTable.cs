@@ -9,11 +9,11 @@ namespace CarSellingSystem.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Vehicles");
+                name: "dbo");
 
             migrationBuilder.CreateTable(
                 name: "Vehicles",
-                schema: "Vehicles",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -55,7 +55,7 @@ namespace CarSellingSystem.Migrations
                     table.ForeignKey(
                         name: "FK_VehicleFeatures_Vehicles_VehicleId",
                         column: x => x.VehicleId,
-                        principalSchema: "Vehicles",
+                        principalSchema: "dbo",
                         principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -68,7 +68,7 @@ namespace CarSellingSystem.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_ModelId",
-                schema: "Vehicles",
+                schema: "dbo",
                 table: "Vehicles",
                 column: "ModelId");
         }
@@ -80,7 +80,7 @@ namespace CarSellingSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vehicles",
-                schema: "Vehicles");
+                schema: "dbo");
         }
     }
 }
