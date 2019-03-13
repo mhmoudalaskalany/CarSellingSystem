@@ -15,17 +15,17 @@ namespace CarSellingSystem.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Vehicle>().HasKey(x => x.Id);
-            modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactName).HasColumnName("ContactName");
-            modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactEmail).HasColumnName("ContactEmail");
-            modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactPhone).HasColumnName("ContactPhone");
-            modelBuilder.Entity<Vehicle>().ToTable("Vehicles", "Vehicles");
+            //modelBuilder.Entity<Vehicle>().HasKey(x => x.Id);
+            //modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactName).HasColumnName("ContactName");
+            //modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactEmail).HasColumnName("ContactEmail");
+            //modelBuilder.Entity<Vehicle>().OwnsOne(x => x.Contact).Property(c => c.ContactPhone).HasColumnName("ContactPhone");
+            //modelBuilder.Entity<Vehicle>().ToTable("Vehicles", "Vehicles");
 
-            modelBuilder.Entity<VehicleFeature>().HasKey(vf => new
-            {
-                vf.VehicleId,
-                vf.FeatureId
-            });
+            //modelBuilder.Entity<VehicleFeature>().HasKey(vf => new
+            //{
+            //    vf.VehicleId,
+            //    vf.FeatureId
+            //});
         }
     }
 }

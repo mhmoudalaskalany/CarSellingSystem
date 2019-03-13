@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarSellingSystem.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20190309220448_addFeatureModel")]
-    partial class addFeatureModel
+    [Migration("20190313120213_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

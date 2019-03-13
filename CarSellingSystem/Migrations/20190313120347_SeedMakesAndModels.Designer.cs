@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarSellingSystem.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20190309220502_seedFeatures")]
-    partial class seedFeatures
+    [Migration("20190313120347_SeedMakesAndModels")]
+    partial class SeedMakesAndModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,7 +2,7 @@
 
 namespace CarSellingSystem.Migrations
 {
-    public partial class addmigrationseedData : Migration
+    public partial class SeedMakesAndModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
