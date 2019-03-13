@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CarSellingSystem.Models;
 using CarSellingSystem.Persistence;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarSellingSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/api/vehicles")]
     [ApiController]
     public class VehiclesController : ControllerBase
     {
@@ -24,7 +19,7 @@ namespace CarSellingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateVehicle(Vehicle vehicle)
+        public IActionResult CreateVehicle([FromBody] Vehicle vehicle)
         {
             return Ok(vehicle);
         }
