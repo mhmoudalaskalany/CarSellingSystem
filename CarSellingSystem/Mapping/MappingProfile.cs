@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using CarSellingSystem.ApiResources;
 using CarSellingSystem.Models;
@@ -18,11 +19,25 @@ namespace CarSellingSystem.Mapping
                 .ForMember(vr => vr.Features , opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
             //mapping from api resources to domain models
             CreateMap<VehicleResource, Vehicle>()
+                .ForMember(v => v.Id, opt => opt.Ignore())
                 .ForPath(v => v.Contact.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
                 .ForPath(v => v.Contact.ContactEmail, opt => opt.MapFrom(vr => vr.Contact.Email))
                 .ForPath(v => v.Contact.ContactPhone, opt => opt.MapFrom(vr => vr.Contact.Phone))
-                .ForMember(v => v.Features,
-                    opt => opt.MapFrom(vr => vr.Features.Select(id => new VehicleFeature {FeatureId = id})));
+                .ForMember(v => v.Features, opt => opt.Ignore())
+                .AfterMap((vr, v) =>
+                {
+                    var removedFeatures = v.Features.Where(f => !vr.Features.Contains(f.FeatureId));
+                    foreach (var f in removedFeatures)
+                    {
+                        v.Features.Remove(f);
+                    }
+                    var addedFeatures = vr.Features.Where(id => v.Features.All(f => f.FeatureId != id))
+                        .Select(id => new VehicleFeature {FeatureId = id});
+                    foreach (var f in addedFeatures)
+                    {
+                        v.Features.Add(f);
+                    }
+                });
 
         }
     }

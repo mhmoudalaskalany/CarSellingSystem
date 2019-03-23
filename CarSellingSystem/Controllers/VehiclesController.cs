@@ -24,10 +24,23 @@ namespace CarSellingSystem.Controllers
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(modelState:ModelState);
             var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
             vehicle.LastUpdate = DateTime.Now;
             _conteext.Vehicles.Add(vehicle);
+            await _conteext.SaveChangesAsync();
+            var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleResource vehicleResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(modelState: ModelState);
+            var vehicle = await  _conteext.Vehicles.FindAsync(id);
+            _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+            vehicle.LastUpdate = DateTime.Now;
             await _conteext.SaveChangesAsync();
             var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
             return Ok(result);
