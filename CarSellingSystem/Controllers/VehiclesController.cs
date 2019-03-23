@@ -1,4 +1,6 @@
-﻿using CarSellingSystem.Models;
+﻿using AutoMapper;
+using CarSellingSystem.ApiResources;
+using CarSellingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarSellingSystem.Controllers
@@ -7,9 +9,16 @@ namespace CarSellingSystem.Controllers
     [ApiController]
     public class VehiclesController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult CreateVehicle([FromBody] Vehicle vehicle)
+        private readonly IMapper _mapper;
+
+        public VehiclesController(IMapper mapper)
         {
+            _mapper = mapper;
+        }
+        [HttpPost]
+        public IActionResult CreateVehicle([FromBody] VehicleResource vehicleResource)
+        {
+            var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
             return Ok(vehicle);
         }
     }
