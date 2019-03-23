@@ -5,6 +5,7 @@ using CarSellingSystem.ApiResources;
 using CarSellingSystem.Models;
 using CarSellingSystem.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarSellingSystem.Controllers
 {
@@ -38,8 +39,8 @@ namespace CarSellingSystem.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(modelState: ModelState);
-            var vehicle = await  _conteext.Vehicles.FindAsync(id);
-            _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+            var vehicle = await  _conteext.Vehicles.Include(v => v.Features).FirstOrDefaultAsync(v => v.Id == id);
+            _mapper.Map<VehicleResource, Vehicle>(vehicleResource,vehicle);
             vehicle.LastUpdate = DateTime.Now;
             await _conteext.SaveChangesAsync();
             var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
