@@ -13,6 +13,9 @@ namespace CarSellingSystem.Mapping
             CreateMap<Make, MakeResource>();
             CreateMap<Model, ModelResource>();
             CreateMap<Feature, FeatureResource>();
+            CreateMap<Vehicle, VehicleResource>()
+                .ForPath(vr => vr.Contact , opt => opt.MapFrom(v => new ContactResource{Name = v.Contact.ContactName , Email = v.Contact.ContactEmail , Phone = v.Contact.ContactPhone}))
+                .ForMember(vr => vr.Features , opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
             //mapping from api resources to domain models
             CreateMap<VehicleResource, Vehicle>()
                 .ForPath(v => v.Contact.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
