@@ -2,6 +2,7 @@
 using AutoMapper;
 using CarSellingSystem.ApiResources;
 using CarSellingSystem.Models;
+using CarSellingSystem.Models.OwnedTypes;
 
 namespace CarSellingSystem.Mapping
 {
@@ -11,13 +12,20 @@ namespace CarSellingSystem.Mapping
         {
             //mapping from doamin models to api resources
             CreateMap<Make, MakeResource>();
-            CreateMap<Model, ModelResource>();
-            CreateMap<Feature, FeatureResource>();
-            CreateMap<Vehicle, VehicleResource>()
+            CreateMap<Make, KeyValuePairResource>();
+            CreateMap<Model, KeyValuePairResource>();
+            CreateMap<Feature, KeyValuePairResource>();
+            CreateMap<Vehicle, SaveVehicleResource>()
                 .ForPath(vr => vr.Contact , opt => opt.MapFrom(v => new ContactResource{Name = v.Contact.ContactName , Email = v.Contact.ContactEmail , Phone = v.Contact.ContactPhone}))
                 .ForMember(vr => vr.Features , opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
+            CreateMap<Vehicle, VehicleResource>()
+                .ForPath(vr => vr.Contact, opt => opt.MapFrom(v => new ContactResource { Name = v.Contact.ContactName, Email = v.Contact.ContactEmail, Phone = v.Contact.ContactPhone }))
+                .ForMember(vr => vr.Features,
+                    opt => opt.MapFrom(v =>
+                        v.Features.Select(vr => new KeyValuePairResource { Id = vr.Feature.Id, Name = vr.Feature.Name})))
+                .ForPath(vr => vr.Make , opt => opt.MapFrom(v => v.Model.Make));
             //mapping from api resources to domain models
-            CreateMap<VehicleResource, Vehicle>()
+            CreateMap<SaveVehicleResource, Vehicle>()
                 .ForMember(v => v.Id, opt => opt.Ignore())
                 .ForPath(v => v.Contact.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
                 .ForPath(v => v.Contact.ContactEmail, opt => opt.MapFrom(vr => vr.Contact.Email))
