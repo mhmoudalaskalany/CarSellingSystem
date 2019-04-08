@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using CarSellingSystem.ApiResources;
-using CarSellingSystem.Models;
-using CarSellingSystem.Models.OwnedTypes;
-
+using CarSellingSystem.Core.Models;
 namespace CarSellingSystem.Mapping
 {
     public class MappingProfile :Profile

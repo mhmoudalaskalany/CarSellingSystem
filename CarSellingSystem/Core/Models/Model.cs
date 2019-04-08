@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CarSellingSystem.Models
+namespace CarSellingSystem.Core.Models
 {
     [Table("Models")]
     public class Model

@@ -1,5 +1,5 @@
 ﻿
-namespace CarSellingSystem.Models
+namespace CarSellingSystem.Core.Models
 {
     public class Feature
     {

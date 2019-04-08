@@ -1,8 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
-using CarSellingSystem.Models;
-using CarSellingSystem.Models.OwnedTypes;
+using CarSellingSystem.Core.Models;
 
 namespace CarSellingSystem.ApiResources
 {

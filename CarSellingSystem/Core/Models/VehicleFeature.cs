@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CarSellingSystem.Models
+namespace CarSellingSystem.Core.Models
 {
     [Table("VehicleFeatures")]
     public class VehicleFeature

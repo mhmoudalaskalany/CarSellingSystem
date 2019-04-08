@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarSellingSystem.Core;
 using CarSellingSystem.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

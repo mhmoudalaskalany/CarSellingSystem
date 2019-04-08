@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using CarSellingSystem.Models.OwnedTypes;
+using CarSellingSystem.Core.Models.OwnedTypes;
 
-namespace CarSellingSystem.Models
+namespace CarSellingSystem.Core.Models
 {
     [Table("Vehicles")]
     public class Vehicle

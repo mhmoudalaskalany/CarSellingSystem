@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CarSellingSystem.Models;
+using CarSellingSystem.Core;
+using CarSellingSystem.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarSellingSystem.Persistence

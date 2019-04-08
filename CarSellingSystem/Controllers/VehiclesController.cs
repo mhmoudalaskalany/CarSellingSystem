@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using CarSellingSystem.ApiResources;
-using CarSellingSystem.Models;
+using CarSellingSystem.Core;
+using CarSellingSystem.Core.Models;
 using CarSellingSystem.Persistence;
 using Microsoft.AspNetCore.Mvc;
 

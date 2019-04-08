@@ -1,4 +1,4 @@
-﻿using CarSellingSystem.Models;
+﻿using CarSellingSystem.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarSellingSystem.Persistence

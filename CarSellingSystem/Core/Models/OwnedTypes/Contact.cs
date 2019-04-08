@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace CarSellingSystem.Models.OwnedTypes
+namespace CarSellingSystem.Core.Models.OwnedTypes
 {
     public class Contact
     {

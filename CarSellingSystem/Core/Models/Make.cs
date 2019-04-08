@@ -2,8 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-
-namespace CarSellingSystem.Models
+namespace CarSellingSystem.Core.Models
 {
     public class Make
     {

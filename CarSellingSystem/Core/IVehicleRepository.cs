@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CarSellingSystem.Models;
+using CarSellingSystem.Core.Models;
 
-namespace CarSellingSystem.Persistence
+namespace CarSellingSystem.Core
 {
     public interface IVehicleRepository
     {
