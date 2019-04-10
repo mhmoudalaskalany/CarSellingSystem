@@ -26,15 +26,23 @@ namespace CarSellingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(modelState:ModelState);
-            var vehicle = _mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource);
-            vehicle.LastUpdate = DateTime.Now;
-            _repository.Add(vehicle);
-            await _unitOfWork.SaveChangesAsync();
-            vehicle = await _repository.GetVehicle(vehicle.Id);
-            var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
-            return Ok(result);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(modelState: ModelState);
+                var vehicle = _mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource);
+                vehicle.LastUpdate = DateTime.Now;
+                _repository.Add(vehicle);
+                await _unitOfWork.SaveChangesAsync();
+                vehicle = await _repository.GetVehicle(vehicle.Id);
+                var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         [HttpPut("{id}")]
