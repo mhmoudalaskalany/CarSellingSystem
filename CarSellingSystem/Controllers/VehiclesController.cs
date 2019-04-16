@@ -4,7 +4,6 @@ using AutoMapper;
 using CarSellingSystem.ApiResources;
 using CarSellingSystem.Core;
 using CarSellingSystem.Core.Models;
-using CarSellingSystem.Persistence;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarSellingSystem.Controllers
@@ -17,7 +16,7 @@ namespace CarSellingSystem.Controllers
         private readonly IVehicleRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public VehiclesController(IMapper mapper, CarDbContext conteext , IVehicleRepository repository , IUnitOfWork unitOfWork)
+        public VehiclesController(IMapper mapper , IVehicleRepository repository , IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _repository = repository;
