@@ -23,6 +23,7 @@ namespace CarSellingSystem.Mapping
                         v.Features.Select(vr => new KeyValuePairResource { Id = vr.Feature.Id, Name = vr.Feature.Name})))
                 .ForPath(vr => vr.Make , opt => opt.MapFrom(v => v.Model.Make));
             //mapping from api resources to domain models
+            CreateMap<FilterResource, FilterResource>();
             CreateMap<SaveVehicleResource, Vehicle>()
                 .ForMember(v => v.Id, opt => opt.Ignore())
                 .ForPath(v => v.Contact.ContactName, opt => opt.MapFrom(vr => vr.Contact.Name))
