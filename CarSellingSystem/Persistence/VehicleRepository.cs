@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CarSellingSystem.Core;
 using CarSellingSystem.Core.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,15 +15,25 @@ namespace CarSellingSystem.Persistence
             _context = context;
         }
 
-        public async Task<Vehicle> GetVehicle(int id , bool includeRelated = true)
+        public async Task<Vehicle> GetVehicleAsync(int id , bool includeRelated = true)
         {
             if (!includeRelated)
-                return await _context.Vehicles.FindAsync(id);
+                return await _context.Vehicles.FindAsync(id).ConfigureAwait(false);
            return  await _context.Vehicles.Include(v => v.Features)
-                .ThenInclude(vf => vf.Feature)
-                .Include(m => m.Model)
+               .ThenInclude(vf => vf.Feature)
+               .Include(m => m.Model)
+               .ThenInclude(m => m.Make)
+               .FirstOrDefaultAsync(v => v.Id == id).ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()
+        {
+            return await _context.Vehicles
+                .Include(v => v.Model)
                 .ThenInclude(m => m.Make)
-                .FirstOrDefaultAsync(v => v.Id == id);
+                .Include(v => v.Features)
+                .ThenInclude(vf => vf.Feature)
+                .ToListAsync().ConfigureAwait(false);
         }
 
         public void Add(Vehicle vehicle)

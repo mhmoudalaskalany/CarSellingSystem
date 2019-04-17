@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarSellingSystem.ApiResources;
@@ -32,8 +33,8 @@ namespace CarSellingSystem.Controllers
                 var vehicle = _mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource);
                 vehicle.LastUpdate = DateTime.Now;
                 _repository.Add(vehicle);
-                await _unitOfWork.SaveChangesAsync();
-                vehicle = await _repository.GetVehicle(vehicle.Id);
+                await _unitOfWork.SaveChangesAsync().ConfigureAwait(false);
+                vehicle = await _repository.GetVehicleAsync(vehicle.Id).ConfigureAwait(false);
                 var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
                 return Ok(result);
             }
@@ -49,10 +50,10 @@ namespace CarSellingSystem.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(modelState: ModelState);
-            var vehicle = await _repository.GetVehicle(id);
+            var vehicle = await _repository.GetVehicleAsync(id).ConfigureAwait(false);
             _mapper.Map(vehicleResource,vehicle);
             vehicle.LastUpdate = DateTime.Now;
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync().ConfigureAwait(false);
             var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
             return Ok(result);
         }
@@ -60,11 +61,11 @@ namespace CarSellingSystem.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
-            var vehicle =await  _repository.GetVehicle(id);
+            var vehicle =await  _repository.GetVehicleAsync(id).ConfigureAwait(false);
             if (vehicle == null)
                 return NotFound();
             _repository.Remove(vehicle);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync().ConfigureAwait(false);
             return Ok(id);
         }
 
@@ -73,7 +74,7 @@ namespace CarSellingSystem.Controllers
         {
             try
             {
-                var vehicle = await _repository.GetVehicle(id);
+                var vehicle = await _repository.GetVehicleAsync(id).ConfigureAwait(false);
                 if (vehicle == null)
                     return NotFound();
                 var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
@@ -84,6 +85,13 @@ namespace CarSellingSystem.Controllers
                 throw new Exception(e.Message);
             }
             
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<VehicleResource>> GetVehicles()
+        {
+            var vehicles =await  _repository.GetVehiclesAsync().ConfigureAwait(false);
+            return _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
         }
     }
 }
