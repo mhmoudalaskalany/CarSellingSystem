@@ -25,6 +25,7 @@ namespace CarSellingSystem
         {
             services.AddAutoMapper();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<CarDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CarConnection")));

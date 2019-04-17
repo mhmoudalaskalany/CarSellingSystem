@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarSellingSystem.Controllers
 {
-    public class FeaturesController : Controller
+    [Route("/api/features")]
+    [ApiController]
+    public class FeaturesController : ControllerBase
     {
         private readonly CarDbContext _context;
         private readonly IMapper _mapper;
@@ -20,7 +22,7 @@ namespace CarSellingSystem.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("/api/features")]
+        [HttpGet]
         public async Task<IEnumerable<KeyValuePairResource>> GetFeatures()
         {
             var features = await _context.Features.ToListAsync();

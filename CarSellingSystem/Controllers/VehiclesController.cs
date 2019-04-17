@@ -88,9 +88,10 @@ namespace CarSellingSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VehicleResource>> GetVehicles()
+        public async Task<IEnumerable<VehicleResource>> GetVehicles([FromQuery]FilterResource filterResource)
         {
-            var vehicles =await  _repository.GetVehiclesAsync().ConfigureAwait(false);
+            var filter = _mapper.Map<FilterResource, Filter>(filterResource);
+            var vehicles =await  _repository.GetVehiclesAsync(filter).ConfigureAwait(false);
             return _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
         }
     }

@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarSellingSystem.Controllers
 {
-    
-    public class MakesController : Controller
+    [Route("/api/makes")]
+    [ApiController]
+    public class MakesController : ControllerBase
     {
         private readonly CarDbContext _context;
         private readonly IMapper _mapper;
@@ -20,7 +21,7 @@ namespace CarSellingSystem.Controllers
             _context = context;
             _mapper = mapper;
         }
-        [HttpGet("/api/makes")]
+        [HttpGet]
         public async Task<IEnumerable<MakeResource>> GetMakes()
         {
             var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
