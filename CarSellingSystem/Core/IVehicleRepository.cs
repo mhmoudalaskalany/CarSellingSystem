@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CarSellingSystem.ApiResources;
 using CarSellingSystem.Core.Models;
 
 namespace CarSellingSystem.Core

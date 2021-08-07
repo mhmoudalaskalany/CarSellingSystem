@@ -16,15 +16,15 @@ namespace CarSellingSystem.Persistence
             _context = context;
         }
 
-        public async Task<Vehicle> GetVehicleAsync(int id , bool includeRelated = true)
+        public async Task<Vehicle> GetVehicleAsync(int id, bool includeRelated = true)
         {
             if (!includeRelated)
                 return await _context.Vehicles.FindAsync(id).ConfigureAwait(false);
-           return  await _context.Vehicles.Include(v => v.Features)
-               .ThenInclude(vf => vf.Feature)
-               .Include(m => m.Model)
-               .ThenInclude(m => m.Make)
-               .FirstOrDefaultAsync(v => v.Id == id).ConfigureAwait(false);
+            return await _context.Vehicles.Include(v => v.Features)
+                .ThenInclude(vf => vf.Feature)
+                .Include(m => m.Model)
+                .ThenInclude(m => m.Make)
+                .FirstOrDefaultAsync(v => v.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Vehicle>> GetVehiclesAsync(Filter filter)
