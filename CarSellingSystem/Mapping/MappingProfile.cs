@@ -32,7 +32,7 @@ namespace CarSellingSystem.Mapping
                 .ForMember(v => v.Features, opt => opt.Ignore())
                 .AfterMap((vr, v) =>
                 {
-                    //user to list method to avoid exception (Collection was Modified During Iteration)
+                    //use to list method to avoid exception (Collection was Modified During Iteration)
                     var removedFeatures = v.Features.Where(f => !vr.Features.Contains(f.FeatureId)).ToList();
                     foreach (var f in removedFeatures)
                         v.Features.Remove(f);
